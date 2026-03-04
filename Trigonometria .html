@@ -1,0 +1,249 @@
+<! DOCTYPE html>
+<html>
+ <head>
+  <title></title>
+  <style>
+  /* Configurações Gerais */
+* {
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+}
+
+/* Container Principal */
+.container {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    width: 100%;
+    max-width: 500px; /* Largura ideal para PC */
+    text-align: center;
+}
+
+h1 {
+    color: #4a47a3;
+    margin-bottom: 1.5rem;
+}
+
+h2 {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+/* Select e Inputs */
+select, input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px; /* Evita zoom automático no iPhone */
+    transition: 0.3s;
+}
+
+select:focus, input:focus {
+    border-color: #764ba2;
+    outline: none;
+    box-shadow: 0 0 8px rgba(118, 75, 162, 0.2);
+}
+
+/* Botão Estilizado */
+button {
+    width: 100%;
+    background: #764ba2;
+    color: white;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 10px;
+}
+
+button:hover {
+    background: #5a397a;
+}
+
+/* Resultado */
+#resultado {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f4f4f9;
+    border-radius: 8px;
+    font-weight: bold;
+    color: #4a47a3;
+    min-height: 50px;
+}
+
+/* Responsividade (Tablet e Celular) */
+@media (max-width: 600px) {
+    .container {
+        padding: 1.5rem;
+    }
+    
+    h1 {
+        font-size: 1.5rem;
+    }
+}
+
+/* Esconder as divs (mantido do seu código) */
+#seno, #cosseno, #hipotenusa, #tangent {
+    display: none;
+    animation: fadeIn 0.5s;
+}
+
+/* Animação suave ao aparecer */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+  </style>
+  
+ </head>
+ <body>
+     <div class="container">
+  <h1>Trigonometria</h1>
+  <label>escolha a operação</label>
+  <select id="operacao" onchange="escolha()">
+  <option value="" selected disabled>--- Escolha uma opção ---</option>
+  <option>Seno</option>
+  <option>Cosseno</option>
+  <option>Tangente</option>
+  <option>Hipotenusa</option>
+  </select>
+  <div id="seno" >
+  <h2> Seno, é o cateto oposto sobre a hipotenusa</h2>
+  <label>Digite o valor do cateto oposto:</label>
+  <input type="number" id="sen" placeholder="00">
+ <label>Digite o valor da hipotenusa:</label>
+  <input type="number" id="hip" placeholder="00">
+  <button onclick="calcularseno()">Calcular</button>
+  </div>
+    <div id="cosseno" >
+  <h2> Coseno, é o cateto adjacente sobre a hipotenusa</h2>
+  <label>Digite o valor do cateto adjacente:</label>
+  <input type="number" id="cos" placeholder="00">
+  <label>Digite o valor da hipotenusa:</label>
+  <input type="number" id="hip2" placeholder="00">
+  <button onclick="calcularcosseno()">Calcular</button>
+  </div>
+ 
+  <div id= "tangent">
+  <h2> Tangent é o cateto oposto sobre o cateto adjacente</h2>
+  <label>Digite o valor do cateto oposto:</label>
+  <input type="number" id="oposto" placeholder="00">
+  <label>Digite o valor do cateto adjacente:</label>
+  <input type="number" id="adj" placeholder="00">
+  <button onclick="calculartangente()">Calcular</button>
+  </div>
+  <div id= "hipotenusa">
+  <h2> Hipotenusa é a raiz da soma dos quadrados dos catetos</h2>
+  <label>Digite o valor do cateto oposto:</label>
+  <input type="number" id="catoposto" placeholder="00">
+  <label>Digite o valor do cateto adjacente:</label>
+  <input type="number" id="catadj" placeholder="00">
+  <button onclick="calcularhipotenusa()">Calcular</button>
+  </div>
+  
+  <p id ="resultado"> </p>
+  
+  <script>
+  function escolha(){
+  let escolha= document.getElementById("operacao").value;
+  if (escolha=== "Seno"){
+  let seno = document.getElementById("seno");
+  let cosseno = document.getElementById("cosseno");
+  let hipotenusa = document.getElementById("hipotenusa");
+  let tangent= document.getElementById("tangent");
+  seno.style.display="block";
+  cosseno.style.display="none";
+  hipotenusa.style.display="none";
+  tangent.style.display="none";
+}
+       
+  else if (escolha==="Cosseno"){
+  let seno = document.getElementById("seno");
+  let cosseno = document.getElementById("cosseno");
+  let hipotenusa = document.getElementById("hipotenusa");
+  let tangent= document.getElementById("tangent");
+  seno.style.display="none";
+  cosseno.style.display="block";
+  hipotenusa.style.display="none";
+  tangent.style.display="none";
+  
+}
+  else if (escolha==="Hipotenusa"){
+  let seno = document.getElementById("seno");
+  let cosseno = document.getElementById("cosseno");
+  let hipotenusa = document.getElementById("hipotenusa");
+  let tangent= document.getElementById("tangent");
+  seno.style.display="none";
+  cosseno.style.display="none";
+  hipotenusa.style.display="block";
+  tangent.style.display="none";
+}
+else if (escolha==="Tangente"){
+  let seno = document.getElementById("seno");
+  let cosseno = document.getElementById("cosseno");
+  let hipotenusa = document.getElementById("hipotenusa");
+  let tangent= document.getElementById("tangent");
+  seno.style.display="none";
+  cosseno.style.display="none";
+  hipotenusa.style.display="none";
+  tangent.style.display="block";
+}
+else { let resultado= document.getElementById("resultado").innerHTML="opção inválida";}
+
+}
+  function calcularseno (){
+  let oposto =document.getElementById("sen").value;
+  let hip= document.getElementById("hip").value;
+  let conta= (oposto/hip);
+  let resultado= document.getElementById("resultado").innerHTML=" O valor do seno é: "+conta.toFixed(2);
+  
+  }
+  
+  function calcularcosseno (){
+  let oposto =document.getElementById("cos").value;
+  let hip= document.getElementById("hip2").value;
+  let conta= (oposto/hip)
+  
+  let resultado= document.getElementById("resultado").innerHTML=" O valor do cosseno é: "+ conta.toFixed(2);
+  
+  }
+  
+  function calcularhipotenusa (){
+  let adj= document.getElementById("catadj").value;
+  let oposto= document.getElementById("catoposto").value;
+  let valor =Math.sqrt(oposto**2 +adj**2);
+  let resposta= document.getElementById("resultado").innerHTML= " o valor da hipotenusa é " + valor.toFixed(2);
+  
+  }
+  function calculartangente (){
+  let oposto =document.getElementById("oposto").value;
+  let adj= document.getElementById("adj").value;
+  let conta= (oposto/adj);
+  let resultado= document.getElementById("resultado").innerHTML=" O valor da Tangente é: "+conta.toFixed(2);
+  
+  }
+  
+ </script>
+ </div>
+</body>
+
+</html>

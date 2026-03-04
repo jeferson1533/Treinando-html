@@ -1,0 +1,36 @@
+<! DOCTYPE html>
+<html>
+ <head>
+  <title>   </title>
+  <style> </style>
+ 
+ </head>
+ <body>
+ <input type="text" id="nomeUsuario" placeholder="Digite seu nome">
+<button onclick="salvar()">Salvar</button>
+<p id="boasVindas"></p>
+<script>
+// 1. Função para salvar o que foi digitado
+function salvar() {
+    const nome = document.getElementById('nomeUsuario').value;
+    localStorage.setItem('usuario_logado', nome);
+    exibirNome();
+}
+
+// 2. Função para ler do banco e mostrar na tela
+function exibirNome() {
+    const nomeSalvo = localStorage.getItem('usuario_logado');
+    const texto = document.getElementById('boasVindas');
+    
+    if (nomeSalvo) {
+        texto.innerText = `Bem-vindo de volta, ${nomeSalvo}!`;
+    }
+}
+
+// Executa ao carregar a página para ver se já existe algo salvo
+exibirNome();
+</script>
+
+ </body>
+
+</html>

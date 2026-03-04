@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Calculador de Pontos</title>
+    <style>
+        body { 
+            font-family: sans-serif; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f4f4f9;
+        }
+        .card { 
+            background: white;
+            padding: 30px; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+            width: 90%; /* Ocupa 90% da largura da tela no celular */
+            max-width: 400px; /* Mas não passa de 400px no computador */
+            text-align: center;
+        }
+        input { 
+            width: 100%; /* Campo de texto ocupa a largura toda do card */
+            padding: 12px; 
+            margin: 10px 0; 
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box; /* Garante que o padding não quebre o layout */
+            font-size: 16px; /* Evita que o iPhone dê zoom automático ao clicar */
+        }
+        button { 
+            width: 100%;
+            padding: 12px; 
+            cursor: pointer; 
+            background-color: #28a745; 
+            color: white; 
+            border: none; 
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        #resultado { 
+            margin-top: 20px; 
+            font-size: 1.2rem;
+            color: #333; 
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Contador de Pontos</h2>
+    <p>Cada vogal vale <b>1 ponto</b>.</p>
+    
+    <input type="text" id="nomeInput" placeholder="Digite o nome aqui...">
+    <button onclick="calcularPontos()">Ver Pontuação</button>
+
+    <div id="resultado"></div>
+</div>
+
+<script>
+    function calcularPontos() {
+        const nome = document.getElementById('nomeInput').value;
+        const display = document.getElementById('resultado');
+
+        // Regex que pega vogais com e sem acento
+        const vogaisEncontradas = nome.match(/[aeiouáéíóúâêîôûãõ]/gi);
+        const pontuacao = vogaisEncontradas ? vogaisEncontradas.length : 0;
+
+        if (nome.trim() === "") {
+            display.innerHTML = "<span style='color: red;'>Digite algo primeiro!</span>";
+        } else {
+            display.innerHTML = `O nome <strong>${nome}</strong><br>marcou <strong>${pontuacao}</strong> pontos!`;
+        }
+    }
+</script>
+
+</body>
+</html>

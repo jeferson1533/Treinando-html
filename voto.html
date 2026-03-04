@@ -1,0 +1,46 @@
+<! DOCTYPE html>
+<html>
+ <head>
+  <title>  apto a votar </title>
+  <style> 
+    h1{ text-align:center; color: gold}
+    label {padding:15px}
+    input {padding:5px; margin:20px}
+     <p id="resposta" ></p>
+</style>
+ 
+ </head>
+ <body>
+ <h1>Vamos votar</H1>
+ <label> Quantos anos você tem?</label>
+ <input id="idade" type="number"  step="1" placeholder="18" oninput= "verificar()">
+ <p id="resposta"></p>
+ <script>
+   function verificar (){
+    let idade= document.getElementById("idade").value;
+    let resposta = document.getElementById("resposta")
+    
+    if (idade < 16){
+     resposta.innerHTML=" Calma você ainda é muito novo";
+     resposta.style.color="blue";
+  }
+ else if( idade < 18 &&  idade >15){ 
+  resposta.innerHTML=" Seu voto é facultativo";
+  resposta.style.color="yellow";
+} 
+else if(idade >=70){
+ resposta.innerHTML= "vai dormir coroa ";
+ resposta.style.color="green";
+ }
+ else if(idade>17 && idade<=69){
+resposta.innerHTML="Pois é, vamos lá votar";
+resposta.style.color="red";
+ }
+ else{resposta.innerHTML="Opção inválida";}
+}
+</script>
+ 
+ 
+ </body>
+
+</html>

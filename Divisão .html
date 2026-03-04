@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>   </title>
+  <style> </style>
+ 
+ </head>
+ <body>
+ <h1> Tabela de Divisão</h1>
+  <label> Coloque o valor pra ser dividido:</label><br>
+  <input id= "valor" type= "number" placeholder= "Ex:0.0" onchange= "divisao()">
+  <p id="resposta"> <p>
+  
+  
+  <script>
+  function divisao (){
+  let valor= document.getElementById("valor").value;
+  let resposta= document.getElementById("resposta");
+  if (valor===""){
+   resposta.innerHTML= "digite um número para fazer a divisão";
+   return;
+   
+}
+ let html= "";
+ for(let i =1; i<=10;i++){
+ let div= valor/i;
+ let cal= div.toFixed(2);
+ 
+ html+=`${valor}/${i}= ${cal}<br>`;
+}
+resposta.innerHTML=html;
+}
+   
+
+ </script>
+  
+ 
+ </body>
+
+</html>

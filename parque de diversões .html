@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parque de Diversões</title>
+  <style>
+    h1 { text-align: center; color: pink; }
+    p { padding: 10px; }
+    label { padding: 10px; }
+    input { margin: 30px; }
+    #resposta { font-weight: bold; color: red; }
+  </style>
+</head>
+<body>
+
+  <h1>Parque de diversões</h1>
+  <p>Altura mínima para o brinquedo: <i>1.50m</i>.</p>
+  
+  <label>Qual a sua altura?</label>
+  <input id="valor" type="number" step="0.01" placeholder="1.50" oninput="verificarAltura()">
+  
+  <p id="resposta"></p>
+
+  <script>
+    function verificarAltura() {
+      // Captura o valor e converte para número decimal (float)
+      let altura = parseFloat(document.getElementById("valor").value);
+      let elementoResposta = document.getElementById("resposta");
+
+      // Verifica se o campo não está vazio
+      if (!isNaN(altura)) {
+        if (altura < 1.5) {
+          let falta = (1.5 - altura).toFixed(2); // Fixa em 2 casas decimais
+          elementoResposta.innerHTML = "Faltam " + falta + "m para você poder entrar.";
+        } else {
+          elementoResposta.innerHTML = "Divirta-se! Você tem a altura permitida.";
+        }
+      } else {
+        elementoResposta.innerHTML = "";
+      }
+    }
+  </script>
+</body>
+</html>

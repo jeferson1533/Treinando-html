@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabuada Inteligente</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f2f5;
+        }
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 300px;
+        }
+        input {
+            padding: 10px;
+            width: 80%;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            outline: none;
+        }
+        input:focus { border-color: #007bff; }
+        .resultado {
+            text-align: left;
+            margin-top: 10px;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+        .linha {
+            padding: 5px 0;
+            font-size: 1.1rem;
+            color: #333;
+        }
+        span { color: #007bff; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Tabuada</h2>
+    <p>Escolha um número:</p>
+    <input type="number" id="num" placeholder="Ex: 7" oninput="gerarTabuada()">
+    
+    <div id="resultado" class="resultado">
+        <small style="color: #888;">Digite um número acima...</small>
+    </div>
+</div>
+
+<script>
+    function gerarTabuada() {
+        const num = document.getElementById('num').value;
+        const resDiv = document.getElementById('resultado');
+        
+        // Limpa o conteúdo se o input estiver vazio
+        if (num === "") {
+            resDiv.innerHTML = '<small style="color: #888;">Digite um número acima...</small>';
+            return;
+        }
+
+        let html = '';
+        for (let i = 0; i <= 10; i++) {
+            let resultado = num * i;
+            html += `<div class="linha">${num} x ${i} = <span>${resultado}</span></div>`;
+        }
+        
+        resDiv.innerHTML = html;
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>   </title>
+  <style></style>
+ 
+ </head>
+ <body>
+ <h1> Calculadora</h1>
+ <input type="number" id="x">
+ <input type="text" id="operacao" style="width:50px; text-align: center; " readonly>
+ <input type="number" id="y"><br>
+ <button  onclick="operacao('+')">+</button>
+ <button onclick="operacao('-')">-</button>
+ <button onclick="operacao('×')">×</button>
+ <button onclick="operacao('÷')">÷</button><br>
+ <button onclick="calcular()"> =</button>
+ <button onclick="limpar ()" style= "fonte-sise:30px">C</button>
+ 
+ <p id= "resultado"></p>
+ </body>
+<script>
+ function operacao (op){
+  document.getElementById("operacao").value=op;
+
+}
+function calcular(){
+let operacao= document.getElementById("operacao").value;
+let x = Number( document.getElementById("x").value);
+let y = Number( document.getElementById("y").value);
+let result = document.getElementById("resultado");
+let mensagem;
+switch (operacao){
+case "+":
+mensagem= x+y
+break;
+case "-":
+mensagem=x-y
+break;
+case "×":
+mensagem =x*y
+break;
+case "÷":
+mensagem =x/y
+break;
+default :
+mensagem= "opção inválida";
+
+}
+result.innerHTML=mensagem;
+}
+function limpar (){
+document.getElementById("resultado").innerHTML="";
+document.getElementById("x").value="";
+document.getElementById("y").value="";
+document.getElementById("operacao").value="";
+
+}
+
+ </script>
+
+</html>

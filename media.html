@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora Estatística Completa</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; padding: 30px; background-color: #f0f2f5; color: #333; }
+        .container { max-width: 550px; margin: auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h2 { color: #007bff; margin-top: 0; }
+        input { padding: 12px; width: calc(100% - 26px); border: 2px solid #ddd; border-radius: 6px; margin-bottom: 15px; font-size: 16px; }
+        .btns { display: flex; gap: 10px; }
+        button { flex: 1; padding: 12px; cursor: pointer; border: none; border-radius: 6px; font-weight: bold; transition: 0.3s; }
+        .btn-calc { background: #28a745; color: white; }
+        .btn-calc:hover { background: #218838; }
+        .btn-clear { background: #dc3545; color: white; }
+        .btn-clear:hover { background: #c82333; }
+        #resultado { margin-top: 20px; padding: 15px; background: #f8f9fa; border-left: 5px solid #007bff; border-radius: 4px; display: none; }
+        p { margin: 8px 0; border-bottom: 1px solid #eee; padding-bottom: 4px; }
+        span { float: right; font-weight: bold; color: #0056b3; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Estatística Pro</h2>
+    <p>Insira os valores (ex: q1, 10, 20, 20, 40):</p>
+    
+    <input type="text" id="entrada" placeholder="Ex: 40, 26, q1, 40">
+    
+    <div class="btns">
+        <button class="btn-calc" onclick="calcular()">Calcular Tudo</button>
+        <button class="btn-clear" onclick="limpar()">Limpar</button>
+    </div>
+
+    <div id="resultado">
+        <p>Média: <span id="res-media"></span></p>
+        <p>Mediana: <span id="res-mediana"></span></p>
+        <p>Moda: <span id="res-moda"></span></p>
+        <p>Desvio Padrão: <span id="res-desvio"></span></p>
+    </div>
+</div>
+
+<script>
+    function calcular() {
+        const input = document.getElementById('entrada').value;
+        
+        // Limpeza e conversão
+        const valores = input.split(',')
+            .map(item => item.trim())
+            .filter(item => item !== "" && !isNaN(item))
+            .map(Number)
+            .sort((a, b) => a - b);
+
+        if (valores.length === 0) {
+            alert("Opa! Insira números válidos para calcular.");
+            return;
+        }
+
+        const n = valores.length;
+
+        // --- MÉDIA ---
+        const soma = valores.reduce((a, b) => a + b, 0);
+        const media = soma / n;
+
+        // --- MEDIANA ---
+        let mediana;
+        const meio = Math.floor(n / 2);
+        mediana = n % 2 === 0 ? (valores[meio - 1] + valores[meio]) / 2 : valores[meio];
+
+        // --- MODA ---
+        const contagem = {};
+        let maxRepeticao = 0;
+        let modas = [];
+
+        valores.forEach(v => {
+            contagem[v] = (contagem[v] || 0) + 1;
+            if (contagem[v] > maxRepeticao) maxRepeticao = contagem[v];
+        });
+
+        if (maxRepeticao > 1) {
+            for (const num in contagem) {
+                if (contagem[num] === maxRepeticao) modas.push(num);
+            }
+        }
+        const modaTexto = modas.length > 0 ? modas.join(", ") : "Amodal";
+
+        // --- DESVIO PADRÃO ---
+        // 1. Soma dos quadrados da diferença (xi - media)²
+        const variancia = valores.reduce((acc, val) => acc + Math.pow(val - media, 2), 0) / n;
+        const desvioPadrao = Math.sqrt(variancia);
+
+        // Exibir resultados
+        document.getElementById('res-media').innerText = media.toFixed(2);
+        document.getElementById('res-mediana').innerText = mediana.toFixed(2);
+        document.getElementById('res-moda').innerText = modaTexto;
+        document.getElementById('res-desvio').innerText = desvioPadrao.toFixed(2);
+        document.getElementById('resultado').style.display = 'block';
+    }
+
+    function limpar() {
+        document.getElementById('entrada').value = "";
+        document.getElementById('resultado').style.display = 'none';
+        document.getElementById('entrada').focus();
+    }
+</script>
+
+</body>
+</html>

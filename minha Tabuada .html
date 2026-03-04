@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title> minha tabuada  </title>
+  <style> </style>
+ 
+ </head>
+ <body>
+ <h1> Minha tabuada</h2>
+ <label>coloque o valor da tabuada correspondente</label><br>
+ <input type="number" id ="valor" placeholder="Ex:0.0" onchange= "tabuada()">
+ <p id="resposta"></p>
+ <script>
+ function tabuada(){
+   let valor= document.getElementById("valor").value;
+   let resultado = document.getElementById("resposta");
+   if (valor===""){
+    resposta.innerHTML="por favor digite um número no campo acima ";
+   return;
+}
+  let html="";
+  for (let i=0; i<=10; i++){
+  let resultado=valor*i;
+  html+=`${valor} x ${i}= ${resultado}<br> `;
+}
+resposta.innerHTML= html;
+   }
+ </script>
+ 
+ </body>
+
+</html>

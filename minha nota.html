@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html> 
+  <head>
+    <title> conferir notas</title>
+    <style> 
+      h1{ text-align: center; color: pink}
+      
+    
+    </style>
+
+  </head>
+  <body>
+    <h1> Será que você tirou boas notas</h1>
+    <label> Coloque as suas notas:</label><br>
+    <input id="notas" type="number" placeholder= "60.7" step="0.1"><br>
+    <button onclick="msg ()">verificar</button><br>
+    
+    <p id="mensagem"></p>
+    <script>
+    function msg (){
+    let  notas = Number(document.getElementById("notas").value);
+    let mensagem= document.getElementById("mensagem");
+    if  (notas<60){
+    mensagem.style.color="red";
+    mensagem.innerHTML= `Pois é sua nota foi ${notas} faltou ${ 60-notas} pontos pra você passar`;
+    }
+    else if ( notas===60){
+    mensagem.style.color="yellow";
+    mensagem.innerHTML=`Pois é guerreiro sua nota foi ${notas} passou por um tiro de raspão!!!`;
+    
+}
+   else { 
+   mensagem.style.color="green";
+   mensagem.innerHTML=` Parabéns você foi aprovado`;}
+    
+
+    
+}
+</script>
+    
+
+  </body>
+</html>

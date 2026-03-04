@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador Simples</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f9;
+        }
+        .container {
+            text-align: center;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        h1 { font-size: 4rem; margin: 10px 0; color: #333; }
+        button {
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            transition: opacity 0.2s;
+        }
+        .btn-dec { background-color: #ff4d4d; color: white; }
+        .btn-reset { background-color: #ccc; }
+        .btn-inc { background-color: #4CAF50; color: white; }
+        button:hover { opacity: 0.8; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Contador</h2>
+        <h1 id="valor">0</h1>
+        <button class="btn-dec" onclick="alterar(-1)">Diminuir</button>
+        <button class="btn-reset" onclick="resetar()">Resetar</button>
+        <button class="btn-inc" onclick="alterar(1)">Aumentar</button>
+    </div>
+
+    <script>
+        let contador = 0;
+        const display = document.getElementById('valor');
+
+        function alterar(valor) {
+            contador += valor;
+            atualizarTela();
+        }
+
+        function resetar() {
+            contador = 0;
+            atualizarTela();
+        }
+
+        function atualizarTela() {
+            display.innerText = contador;
+            
+            // Um toque extra: mudar a cor baseado no valor
+            if (contador > 0) display.style.color = "#4CAF50";
+            else if (contador < 0) display.style.color = "#ff4d4d";
+            else display.style.color = "#333";
+        }
+    </script>
+
+</body>
+</html>
